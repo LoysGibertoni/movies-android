@@ -19,4 +19,9 @@ dependencies {
     implementation(libs.koin.core)
 
     implementation(libs.paging.common)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.coroutines.test)
+    testImplementation(libs.paging.testing)
 }

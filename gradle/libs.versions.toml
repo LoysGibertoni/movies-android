@@ -15,6 +15,8 @@ coil = "3.1.0"
 paging = "3.3.6"
 navigation = "2.9.0"
 jetbrains-kotlin-jvm = "2.0.21"
+mockk = "1.14.2"
+coroutines-test = "1.10.2"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -43,8 +45,11 @@ coil-network = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", versi
 paging-runtime = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging" }
 paging-common = { group = "androidx.paging", name = "paging-common", version.ref = "paging" }
 paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging" }
+paging-testing = { group = "androidx.paging", name = "paging-testing", version.ref = "paging" }
 navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
 kotlin-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization-json" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines-test" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

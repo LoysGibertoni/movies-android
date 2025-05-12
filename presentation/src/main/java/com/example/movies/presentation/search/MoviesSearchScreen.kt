@@ -30,6 +30,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.ColorPainter
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.tooling.preview.Preview
@@ -79,7 +81,10 @@ private fun SearchBar(
                 .padding(
                     horizontal = 16.dp,
                     vertical = 8.dp
-                ),
+                )
+                .semantics { 
+                    contentDescription = "Campo de texto para busca de filmes por título"
+                },
             placeholder = { Text("Buscar por título") },
             value = query,
             onValueChange = onQueryChange,
@@ -149,16 +154,35 @@ private fun MoviesListItem(
             AsyncImage(
                 modifier = Modifier.fillMaxWidth(fraction = 0.33f).aspectRatio(0.67f),
                 model = movie.poster,
-                contentDescription = "Imagem do poster",
+                contentDescription = "Imagem do poster do filme",
                 placeholder = ColorPainter(MaterialTheme.colorScheme.surfaceDim),
                 error = ColorPainter(MaterialTheme.colorScheme.surfaceDim),
             )
         },
-        overlineContent = { Text(movie.year) },
-        headlineContent = {
-            Text(movie.title)
+        overlineContent = {
+            Text(
+                modifier = Modifier.semantics {
+                    contentDescription = "Ano de lançamento do filme"
+                },
+                text = movie.year,
+            )
         },
-        trailingContent = { Text(movie.type) },
+        headlineContent = {
+            Text(
+                modifier = Modifier.semantics {
+                    contentDescription = "Título do filme"
+                },
+                text = movie.title,
+            )
+        },
+        trailingContent = {
+            Text(
+                modifier = Modifier.semantics {
+                    contentDescription = "Tipo do filme"
+                },
+                text = movie.type,
+            )
+        },
         shadowElevation = 8.dp
     )
 }

@@ -27,4 +27,9 @@ dependencies {
     implementation(libs.okhttp.logging)
 
     implementation(libs.paging.common)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.coroutines.test)
+    testImplementation(libs.paging.testing)
 }

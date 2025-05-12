@@ -13,6 +13,6 @@ class SearchMoviesUseCase(
 ) {
 
     suspend operator fun invoke(title: String): Flow<PagingData<Movie>> =
-        if (title.length < MIN_SEARCH_LENGTH) flowOf(PagingData.Companion.empty())
+        if (title.length < MIN_SEARCH_LENGTH) flowOf(PagingData.empty())
         else repository.search(title)
 }

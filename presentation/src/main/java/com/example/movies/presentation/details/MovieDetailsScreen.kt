@@ -19,6 +19,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.ColorPainter
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -75,7 +77,7 @@ private fun ContentHeader(movie: MovieDetails) {
                 AsyncImage(
                     modifier = Modifier.fillMaxWidth(fraction = 0.33f).aspectRatio(0.67f),
                     model = movie.poster,
-                    contentDescription = "Imagem do poster",
+                    contentDescription = "Imagem do poster do filme",
                     placeholder = ColorPainter(MaterialTheme.colorScheme.surfaceDim),
                     error = ColorPainter(MaterialTheme.colorScheme.surfaceDim),
                 )
@@ -84,16 +86,24 @@ private fun ContentHeader(movie: MovieDetails) {
                     modifier = Modifier.fillMaxWidth().padding(16.dp)
                 ) {
                     Text(
+                        modifier = Modifier.semantics {
+                            contentDescription = "Ano de lançamento e tipo do filme"
+                        },
                         text = "${movie.year} (${movie.type})",
                         style = MaterialTheme.typography.labelSmall
                     )
                     Text(
-                        modifier = Modifier.padding(vertical = 4.dp),
+                        modifier = Modifier.padding(vertical = 4.dp).semantics {
+                            contentDescription = "Título do filme"
+                        },
                         text = movie.title,
                         style = MaterialTheme.typography.headlineMedium,
                         color = MaterialTheme.colorScheme.onBackground
                     )
                     Text(
+                        modifier = Modifier.semantics {
+                            contentDescription = "Gênero do filme"
+                        },
                         text = movie.genre,
                         style = MaterialTheme.typography.bodyMedium
                     )
@@ -101,7 +111,11 @@ private fun ContentHeader(movie: MovieDetails) {
             }
 
             Text(
-                modifier = Modifier.align(Alignment.TopEnd).padding(16.dp),
+                modifier = Modifier.align(Alignment.TopEnd)
+                    .padding(16.dp)
+                    .semantics {
+                        contentDescription = "Indicação etária do filme"
+                    },
                 text = movie.rated,
                 style = MaterialTheme.typography.labelLarge
             )
@@ -112,7 +126,10 @@ private fun ContentHeader(movie: MovieDetails) {
 @Composable
 private fun ContentInfo(movie: MovieDetails) {
     Text(
-        modifier = Modifier.padding(16.dp),
+        modifier = Modifier.padding(16.dp)
+            .semantics {
+                contentDescription = "Sinopse do filme"
+            },
         text = movie.plot,
         style = MaterialTheme.typography.bodyLarge
     )
