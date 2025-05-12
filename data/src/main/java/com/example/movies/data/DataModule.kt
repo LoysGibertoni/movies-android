@@ -1,5 +1,6 @@
 package com.example.movies.data
 
+import Movies.data.BuildConfig
 import com.example.movies.data.remote.interceptor.ApiKeyInterceptor
 import com.example.movies.data.remote.source.MoviesApi
 import com.example.movies.data.repository.MoviesRepositoryImpl
@@ -29,7 +30,7 @@ val DataModule = module {
         Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .client(get())
-            .baseUrl("http://www.omdbapi.com/")
+            .baseUrl(BuildConfig.API_URL)
             .build()
     }
 
