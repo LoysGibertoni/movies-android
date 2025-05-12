@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_field_content_description">Campo de texto para busca de filmes por título</string>
+    <string name="search_field_placeholder">Buscar por título</string>
+    <string name="search_error_message">Erro ao buscar filmes</string>
+    <string name="search_item_error_message">Erro ao carregar dados</string>
+    <string name="year_content_description">Ano de lançamento do filme</string>
+    <string name="type_content_description">Tipo do filme</string>
+    <string name="details_error_message">Erro ao carregar dados do filme</string>
+    <string name="try_again_button">Tentar novamente</string>
+    <string name="poster_content_description">Imagem do poster do filme</string>
+    <string name="year_and_type_content_description">Ano de lançamento e tipo do filme</string>
+    <string name="rated_content_description">Indicação etária do filme</string>
+    <string name="title_content_description">Título do filme</string>
+    <string name="genre_content_description">Gênero do filme</string>
+    <string name="plot_content_description">Sinopse do filme</string>
+    <string name="director_label">Diretor</string>
+    <string name="writer_label">Escritor</string>
+    <string name="actors_label">Atores</string>
+    <string name="language_label">Idioma</string>
+    <string name="country_label">País</string>
+    <string name="awards_label">Prêmios</string>
+    <string name="ratings_label">Avaliações</string>
+</resources>

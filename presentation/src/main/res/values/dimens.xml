@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="space_tiny">4dp</dimen>
+    <dimen name="space_small">8dp</dimen>
+    <dimen name="space_medium">16dp</dimen>
+    <dimen name="space_large">24dp</dimen>
+
+    <dimen name="search_item_size">136dp</dimen>
+    <dimen name="search_item_error_icon_size">24dp</dimen>
+    <dimen name="search_item_error_button_height">28dp</dimen>
+
+    <dimen name="fullscreen_error_icon_size">48dp</dimen>
+</resources>

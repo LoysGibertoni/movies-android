@@ -15,7 +15,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.dimensionResource
+import com.example.movies.presentation.R
 
 @Composable
 internal fun FullScreenError(
@@ -28,13 +29,13 @@ internal fun FullScreenError(
         verticalArrangement = Arrangement.Center
     ) {
         Icon(
-            modifier = Modifier.size(48.dp),
+            modifier = Modifier.size(dimensionResource(R.dimen.fullscreen_error_icon_size)),
             imageVector = Icons.Filled.Warning,
             contentDescription = null,
             tint = MaterialTheme.colorScheme.error
         )
         Text(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(dimensionResource(R.dimen.space_medium)),
             text = message,
             color = MaterialTheme.colorScheme.onBackground,
             style = MaterialTheme.typography.titleLarge,

@@ -19,12 +19,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.ColorPainter
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.movies.domain.model.MovieDetails
+import com.example.movies.presentation.R
 import com.example.movies.presentation.widget.FullScreenError
 import com.example.movies.presentation.widget.FullScreenErrorButton
 import com.example.movies.presentation.widget.FullScreenLoadingIndicator
@@ -43,9 +46,9 @@ fun MoviesDetailsScreen(id: String) {
         MovieDetailsUiState.Loading -> FullScreenLoadingIndicator()
         is MovieDetailsUiState.Success -> MovieDetailsContent((uiState as MovieDetailsUiState.Success).movieDetails)
         MovieDetailsUiState.Error -> FullScreenError(
-            message = "Erro ao carregar dados do filme",
+            message = stringResource(R.string.details_error_message),
             button = FullScreenErrorButton(
-                text = "Tentar novamente",
+                text = stringResource(R.string.try_again_button),
                 onClick = viewModel::loadData
             )
         )
@@ -55,7 +58,8 @@ fun MoviesDetailsScreen(id: String) {
 @Composable
 private fun MovieDetailsContent(movie: MovieDetails) {
     Column(
-        modifier = Modifier.verticalScroll(rememberScrollState())
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
             .background(MaterialTheme.colorScheme.background)
     ) {
         ContentHeader(movie)
@@ -65,6 +69,7 @@ private fun MovieDetailsContent(movie: MovieDetails) {
 
 @Composable
 private fun ContentHeader(movie: MovieDetails) {
+    val context = LocalContext.current
     Surface(
         color = MaterialTheme.colorScheme.surfaceVariant
     ) {
@@ -75,34 +80,41 @@ private fun ContentHeader(movie: MovieDetails) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 AsyncImage(
-                    modifier = Modifier.fillMaxWidth(fraction = 0.33f).aspectRatio(0.67f),
+                    modifier = Modifier
+                        .fillMaxWidth(fraction = 0.33f)
+                        .aspectRatio(0.67f),
                     model = movie.poster,
-                    contentDescription = "Imagem do poster do filme",
+                    contentDescription = stringResource(R.string.poster_content_description),
                     placeholder = ColorPainter(MaterialTheme.colorScheme.surfaceDim),
                     error = ColorPainter(MaterialTheme.colorScheme.surfaceDim),
                 )
 
                 Column(
-                    modifier = Modifier.fillMaxWidth().padding(16.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(dimensionResource(R.dimen.space_medium))
                 ) {
                     Text(
                         modifier = Modifier.semantics {
-                            contentDescription = "Ano de lançamento e tipo do filme"
+                            contentDescription = context.getString(R.string.year_and_type_content_description)
                         },
                         text = "${movie.year} (${movie.type})",
                         style = MaterialTheme.typography.labelSmall
                     )
                     Text(
-                        modifier = Modifier.padding(vertical = 4.dp).semantics {
-                            contentDescription = "Título do filme"
-                        },
+                        modifier = Modifier
+                            .padding(vertical = dimensionResource(R.dimen.space_tiny))
+                            .semantics {
+                                contentDescription =
+                                    context.getString(R.string.title_content_description)
+                            },
                         text = movie.title,
                         style = MaterialTheme.typography.headlineMedium,
                         color = MaterialTheme.colorScheme.onBackground
                     )
                     Text(
                         modifier = Modifier.semantics {
-                            contentDescription = "Gênero do filme"
+                            contentDescription = context.getString(R.string.genre_content_description)
                         },
                         text = movie.genre,
                         style = MaterialTheme.typography.bodyMedium
@@ -111,10 +123,11 @@ private fun ContentHeader(movie: MovieDetails) {
             }
 
             Text(
-                modifier = Modifier.align(Alignment.TopEnd)
-                    .padding(16.dp)
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(dimensionResource(R.dimen.space_medium))
                     .semantics {
-                        contentDescription = "Indicação etária do filme"
+                        contentDescription = context.getString(R.string.rated_content_description)
                     },
                 text = movie.rated,
                 style = MaterialTheme.typography.labelLarge
@@ -125,40 +138,42 @@ private fun ContentHeader(movie: MovieDetails) {
 
 @Composable
 private fun ContentInfo(movie: MovieDetails) {
+    val context = LocalContext.current
     Text(
-        modifier = Modifier.padding(16.dp)
+        modifier = Modifier
+            .padding(dimensionResource(R.dimen.space_medium))
             .semantics {
-                contentDescription = "Sinopse do filme"
+                contentDescription = context.getString(R.string.plot_content_description)
             },
         text = movie.plot,
         style = MaterialTheme.typography.bodyLarge
     )
     LabelValue(
-        label = "Diretor",
+        label = stringResource(R.string.director_label),
         value = movie.director
     )
     LabelValue(
-        label = "Escritor",
+        label = stringResource(R.string.writer_label),
         value = movie.writer
     )
     LabelValue(
-        label = "Atores",
+        label = stringResource(R.string.actors_label),
         value = movie.actors
     )
     LabelValue(
-        label = "Idioma",
+        label = stringResource(R.string.language_label),
         value = movie.language
     )
     LabelValue(
-        label = "País",
+        label = stringResource(R.string.country_label),
         value = movie.country
     )
     LabelValue(
-        label = "Prêmios",
+        label = stringResource(R.string.awards_label),
         value = movie.awards
     )
     LabelValue(
-        label = "Avaliações",
+        label = stringResource(R.string.ratings_label),
         value = movie.ratings
     )
 }
@@ -170,8 +185,8 @@ private fun LabelValue(
 ) {
     Column(
         modifier = Modifier.padding(
-            vertical = 8.dp,
-            horizontal = 16.dp
+            vertical = dimensionResource(R.dimen.space_small),
+            horizontal = dimensionResource(R.dimen.space_medium)
         )
     ) {
         Text(

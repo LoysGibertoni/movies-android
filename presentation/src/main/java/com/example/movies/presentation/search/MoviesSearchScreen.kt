@@ -30,17 +30,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.ColorPainter
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil3.compose.AsyncImage
 import com.example.movies.domain.model.Movie
+import com.example.movies.presentation.R
 import com.example.movies.presentation.widget.FullScreenError
 import com.example.movies.presentation.widget.FullScreenErrorButton
 import com.example.movies.presentation.widget.FullScreenLoadingIndicator
@@ -70,6 +73,7 @@ private fun SearchBar(
     query: String,
     onQueryChange: (String) -> Unit
 ) {
+    val context = LocalContext.current
     Box(modifier = Modifier
         .fillMaxWidth()
         .background(
@@ -79,13 +83,14 @@ private fun SearchBar(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    horizontal = 16.dp,
-                    vertical = 8.dp
+                    horizontal = dimensionResource(R.dimen.space_medium),
+                    vertical = dimensionResource(R.dimen.space_small)
                 )
-                .semantics { 
-                    contentDescription = "Campo de texto para busca de filmes por título"
+                .semantics {
+                    contentDescription =
+                        context.getString(R.string.search_field_content_description)
                 },
-            placeholder = { Text("Buscar por título") },
+            placeholder = { Text(stringResource(R.string.search_field_placeholder)) },
             value = query,
             onValueChange = onQueryChange,
             maxLines = 1,
@@ -108,16 +113,16 @@ private fun MoviesList(
         when (movies.loadState.refresh) {
             LoadState.Loading -> FullScreenLoadingIndicator()
             is LoadState.Error -> FullScreenError(
-                message = "Erro ao buscar filmes",
+                message = stringResource(R.string.search_error_message),
                 button = FullScreenErrorButton(
-                    text = "Tentar novamente",
+                    text = stringResource(R.string.try_again_button),
                     onClick = movies::refresh
                 )
             )
             is LoadState.NotLoading -> LazyColumn(
                 modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(16.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                contentPadding = PaddingValues(dimensionResource(R.dimen.space_medium)),
+                verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.space_small))
             ) {
 
                 if (movies.loadState.prepend is LoadState.Loading) {
@@ -148,13 +153,16 @@ private fun MoviesListItem(
     movie: Movie,
     onClick: () -> Unit
 ) {
+    val context = LocalContext.current
     ListItem(
         modifier = Modifier.clickable(onClick = onClick),
         leadingContent = {
             AsyncImage(
-                modifier = Modifier.fillMaxWidth(fraction = 0.33f).aspectRatio(0.67f),
+                modifier = Modifier
+                    .fillMaxWidth(fraction = 0.33f)
+                    .aspectRatio(0.67f),
                 model = movie.poster,
-                contentDescription = "Imagem do poster do filme",
+                contentDescription = stringResource(R.string.poster_content_description),
                 placeholder = ColorPainter(MaterialTheme.colorScheme.surfaceDim),
                 error = ColorPainter(MaterialTheme.colorScheme.surfaceDim),
             )
@@ -162,7 +170,7 @@ private fun MoviesListItem(
         overlineContent = {
             Text(
                 modifier = Modifier.semantics {
-                    contentDescription = "Ano de lançamento do filme"
+                    contentDescription = context.getString(R.string.year_content_description)
                 },
                 text = movie.year,
             )
@@ -170,7 +178,7 @@ private fun MoviesListItem(
         headlineContent = {
             Text(
                 modifier = Modifier.semantics {
-                    contentDescription = "Título do filme"
+                    contentDescription = context.getString(R.string.title_content_description)
                 },
                 text = movie.title,
             )
@@ -178,19 +186,21 @@ private fun MoviesListItem(
         trailingContent = {
             Text(
                 modifier = Modifier.semantics {
-                    contentDescription = "Tipo do filme"
+                    contentDescription = context.getString(R.string.type_content_description)
                 },
                 text = movie.type,
             )
         },
-        shadowElevation = 8.dp
+        shadowElevation = dimensionResource(R.dimen.space_small)
     )
 }
 
 @Composable
 private fun ItemLoadingIndicator() {
     Box(
-        modifier = Modifier.fillMaxWidth().height(136.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(dimensionResource(R.dimen.search_item_size)),
         contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator()
@@ -202,28 +212,31 @@ private fun ItemError(
     onButtonClick: () -> Unit
 ) {
     Column(
-        modifier = Modifier.fillMaxWidth().height(136.dp).padding(horizontal = 24.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(dimensionResource(R.dimen.search_item_size))
+            .padding(horizontal = dimensionResource(R.dimen.space_large)),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
         Icon(
-            modifier = Modifier.size(24.dp),
+            modifier = Modifier.size(dimensionResource(R.dimen.search_item_error_icon_size)),
             imageVector = Icons.Filled.Warning,
             contentDescription = null,
             tint = MaterialTheme.colorScheme.error
         )
         Text(
-            modifier = Modifier.padding(8.dp),
-            text = "Erro ao carregar dados",
+            modifier = Modifier.padding(dimensionResource(R.dimen.space_small)),
+            text = stringResource(R.string.search_item_error_message),
             color = MaterialTheme.colorScheme.onBackground,
             style = MaterialTheme.typography.titleSmall,
         )
         ElevatedButton(
-            modifier = Modifier.height(28.dp),
+            modifier = Modifier.height(dimensionResource(R.dimen.search_item_error_button_height)),
             onClick = onButtonClick,
         ) {
             Text(
-                text = "Tentar novamente",
+                text = stringResource(R.string.try_again_button),
                 style = MaterialTheme.typography.labelMedium
             )
         }
