@@ -18,3 +18,7 @@ Para executar o projeto, é necessário:
 - criar uma key através do link https://www.omdbapi.com/apikey.aspx;
 - ativar a key pelo link de confirmação enviado via e-mail;
 - adicionar a key a uma propriedade do `local.properties`: `API_KEY=<sua-key>`
+
+## Pontos a melhorar
+- Criar testes unitários dos módulos Koin;
+- Testes unitários de UI (Robolectric) para validação das telas, dessa forma os instrumentados validam apenas o fluxo e não a exibição.
