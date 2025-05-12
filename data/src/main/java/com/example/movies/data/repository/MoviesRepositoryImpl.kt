@@ -21,7 +21,7 @@ import kotlinx.coroutines.withContext
 private const val PAGE_SIZE = 30
 private const val MAX_SIZE = PAGE_SIZE * 10
 
-class MoviesRepositoryImpl(
+internal class MoviesRepositoryImpl(
     private val api: MoviesApi,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : MoviesRepository {

@@ -6,7 +6,7 @@ import okhttp3.Request
 private const val QUERY_PARAMETER = "apikey"
 private const val API_KEY = "d146a04d" // FIXME
 
-object ApiKeyInterceptor : Interceptor {
+internal object ApiKeyInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain) = chain.proceed(chain.request().addApiKey())
 

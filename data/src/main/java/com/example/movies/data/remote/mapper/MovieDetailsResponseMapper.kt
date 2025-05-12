@@ -3,7 +3,7 @@ package com.example.movies.data.remote.mapper
 import com.example.movies.data.remote.response.MovieDetailsResponse
 import com.example.movies.domain.model.MovieDetails
 
-fun MovieDetailsResponse.toMovieDetails() = MovieDetails(
+internal fun MovieDetailsResponse.toMovieDetails() = MovieDetails(
     id = imdbID,
     type = type,
     title = title,

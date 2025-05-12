@@ -6,14 +6,23 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
+import com.example.movies.data.DataModule
+import com.example.movies.domain.DomainModule
 import com.example.movies.navigation.AppNavHost
+import com.example.movies.presentation.PresentationModule
 import com.example.movies.ui.theme.MoviesTheme
-import org.koin.androidx.compose.KoinAndroidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.compose.KoinApplication
 
 @Composable
 fun App() {
-    MoviesTheme {
-        KoinAndroidContext {
+    KoinApplication(
+        application = {
+            androidLogger()
+            modules(DataModule, DomainModule, PresentationModule)
+        }
+    ) {
+        MoviesTheme {
             val navController = rememberNavController()
             Scaffold(
                 modifier = Modifier.fillMaxSize(),

@@ -47,9 +47,9 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MoviesSearchScreen(
-    onNavigateToMovieDetails: (id: String) -> Unit,
-    viewModel: MoviesSearchViewModel = koinViewModel()
+    onNavigateToMovieDetails: (id: String) -> Unit
 ) {
+    val viewModel: MoviesSearchViewModel = koinViewModel()
     val query by viewModel.queryState.collectAsState()
     val movies = viewModel.moviesState.collectAsLazyPagingItems()
 
@@ -208,7 +208,7 @@ private fun ItemError(
 
 @Preview(showBackground = true)
 @Composable
-fun MoviesSearchScreenPreview() {
+private fun MoviesSearchScreenPreview() {
     MoviesSearchScreen(
         onNavigateToMovieDetails = {}
     )

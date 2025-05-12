@@ -31,12 +31,10 @@ import org.koin.core.parameter.parametersOf
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MoviesDetailsScreen(
-    id: String,
-    viewModel: MovieDetailsViewModel = koinViewModel {
+fun MoviesDetailsScreen(id: String) {
+    val viewModel: MovieDetailsViewModel = koinViewModel {
         parametersOf(id)
     }
-) {
     val uiState by viewModel.uiState.collectAsState()
 
     when (uiState) {
@@ -112,7 +110,7 @@ private fun ContentHeader(movie: MovieDetails) {
 }
 
 @Composable
-fun ContentInfo(movie: MovieDetails) {
+private fun ContentInfo(movie: MovieDetails) {
     Text(
         modifier = Modifier.padding(16.dp),
         text = movie.plot,
@@ -149,7 +147,7 @@ fun ContentInfo(movie: MovieDetails) {
 }
 
 @Composable
-fun LabelValue(
+private fun LabelValue(
     label: String,
     value: String
 ) {
@@ -172,6 +170,6 @@ fun LabelValue(
 
 @Preview(showBackground = true)
 @Composable
-fun MoviesDetailsScreenPreview() {
+private fun MoviesDetailsScreenPreview() {
     MoviesDetailsScreen("id")
 }

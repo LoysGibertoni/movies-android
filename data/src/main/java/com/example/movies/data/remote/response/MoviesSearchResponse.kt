@@ -3,7 +3,7 @@ package com.example.movies.data.remote.response
 import com.google.gson.annotations.SerializedName
 
 
-data class MoviesSearchResponse(
+internal data class MoviesSearchResponse(
     @SerializedName("Search") val results: List<Result>?,
     @SerializedName("totalResults") val totalResults: String,
     @SerializedName("Response") val response: Boolean

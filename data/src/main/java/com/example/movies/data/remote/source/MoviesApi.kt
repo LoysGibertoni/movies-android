@@ -5,7 +5,7 @@ import com.example.movies.data.remote.response.MoviesSearchResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface MoviesApi {
+internal interface MoviesApi {
 
     @GET("/")
     suspend fun search(

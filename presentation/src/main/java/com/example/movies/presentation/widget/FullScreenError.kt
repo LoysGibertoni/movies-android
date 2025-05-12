@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun FullScreenError(
+internal fun FullScreenError(
     message: String,
     button: FullScreenErrorButton? = null
 ) {
@@ -49,7 +49,7 @@ fun FullScreenError(
     }
 }
 
-data class FullScreenErrorButton(
+internal data class FullScreenErrorButton(
     val text: String,
     val onClick: () -> Unit
 )

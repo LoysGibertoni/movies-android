@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 @OptIn(FlowPreview::class)
-class MovieDetailsViewModel(
+internal class MovieDetailsViewModel(
     private val id: String,
     private val movieDetailsUseCase: MovieDetailsUseCase
 ) : ViewModel() {

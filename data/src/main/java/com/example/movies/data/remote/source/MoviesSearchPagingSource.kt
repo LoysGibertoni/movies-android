@@ -6,7 +6,7 @@ import com.example.movies.data.remote.response.MoviesSearchResponse
 
 private const val INITIAL_PAGE = 1
 
-class MoviesSearchPagingSource(
+internal class MoviesSearchPagingSource(
     private val title: String,
     private val api: MoviesApi
 ) : PagingSource<Int, MoviesSearchResponse.Result>() {

@@ -19,7 +19,7 @@ private const val QUERY_SAVED_SATATE_KEY = "query"
 private val QUERY_DEBOUNCE_TIMEOUT = 500.milliseconds
 
 @OptIn(FlowPreview::class)
-class MoviesSearchViewModel(
+internal class MoviesSearchViewModel(
     private val searchMoviesUseCase: SearchMoviesUseCase,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
